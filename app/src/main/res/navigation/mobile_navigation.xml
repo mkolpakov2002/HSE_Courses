@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="ru.hse.miem.hsecourses.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            app:destination="@id/navigation_graph"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"/>
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_notifications"
+            app:destination="@id/navigation_notifications"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"/>
+        <action
+            android:id="@+id/action_navigation_home_to_commonFragment"
+            app:destination="@id/commonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"/>
+        <action
+            android:id="@+id/action_navigation_home_to_firstPageFragment"
+            app:destination="@id/firstPageFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_graph"
+        android:name="ru.hse.miem.hsecourses.ui.graphics.GraphicsFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_graphics" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
+            app:destination="@id/navigation_notifications" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_commonFragment"
+            app:destination="@id/commonFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="ru.hse.miem.hsecourses.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_dashboard"
+            app:destination="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_commonFragment"
+            app:destination="@id/commonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commonFragment"
+        android:name="ru.hse.miem.hsecourses.ui.common.CommonFragment"
+        android:label="fragment_common"
+        tools:layout="@layout/fragment_common" >
+        <action
+            android:id="@+id/action_commonFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_commonFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_commonFragment_to_navigation_notifications"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstPageFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.FirstPageFragment"
+        android:label="fragment_first_page"
+        tools:layout="@layout/fragment_first_page" >
+        <action
+            android:id="@+id/action_firstPageFragment_to_courseSelectFragment"
+            app:destination="@id/courseSelectFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseSelectFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.SelectCourseFragment"
+        android:label="fragment_course_select"
+        tools:layout="@layout/fragment_course_select" >
+        <action
+            android:id="@+id/action_courseSelectFragment_to_courseTargetFragment"
+            app:destination="@id/courseTargetFragment" />
+        <action
+            android:id="@+id/action_courseSelectFragment_to_firstPageFragment"
+            app:destination="@id/firstPageFragment"
+            app:enterAnim="@anim/nav_default_exit_anim"
+            app:exitAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseTargetFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.TargetFragment"
+        android:label="fragment_course_target"
+        tools:layout="@layout/fragment_course_target" >
+        <action
+            android:id="@+id/action_courseTargetFragment_to_courseSelectFragment"
+            app:destination="@id/courseSelectFragment" />
+        <action
+            android:id="@+id/action_courseTargetFragment_to_courseDayFragment"
+            app:destination="@id/courseDayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseDayFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.CourseDayFragment"
+        android:label="fragment_course_day"
+        tools:layout="@layout/fragment_course_day" >
+        <action
+            android:id="@+id/action_courseDayFragment_to_courseTargetFragment"
+            app:destination="@id/courseTargetFragment"
+            />
+        <action
+            android:id="@+id/action_courseDayFragment_to_lastPageFragment2"
+            app:destination="@id/lastPageFragment" />
+        <action
+            android:id="@+id/action_courseDayFragment_to_courseTimeReminderDialogFragment"
+            app:destination="@id/courseTimeReminderDialogFragment" />
+        <action
+            android:id="@+id/action_courseDayFragment_to_textDialogFragment"
+            app:destination="@id/textDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lastPageFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.LastPageFragment"
+        android:label="fragment_last_page"
+        tools:layout="@layout/fragment_last_page" >
+        <action
+            android:id="@+id/action_lastPageFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <dialog
+        android:id="@+id/courseTimeReminderDialogFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.DayTasksDialogFragment"
+        android:label="CourseTimeReminderDialogFragment"
+        tools:layout="@layout/dialog_day_tasks">
+        <action
+            android:id="@+id/action_courseTimeReminderDialogFragment_to_courseDayFragment"
+            app:destination="@id/courseDayFragment" />
+        <action
+            android:id="@+id/action_courseTimeReminderDialogFragment_to_taskTimeDialogFragment"
+            app:destination="@id/taskTimeDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/taskTimeDialogFragment"
+        android:name="ru.hse.miem.hsecourses.ui.setting_course_fragments.TaskTimeDialogFragment"
+        android:label="TaskTimeDialogFragment"
+        tools:layout="@layout/dialog_task">
+        <action
+            android:id="@+id/action_taskTimeDialogFragment_to_courseTimeReminderDialogFragment"
+            app:destination="@id/courseTimeReminderDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/textDialogFragment"
+        android:name="ru.hse.miem.hsecourses.ui.TextDialogFragment"
+        android:label="TextDialogFragment"
+        tools:layout="@layout/dialog_text_info">
+        <action
+            android:id="@+id/action_textDialogFragment_to_courseDayFragment"
+            app:destination="@id/courseDayFragment" />
+    </dialog>
+</navigation>

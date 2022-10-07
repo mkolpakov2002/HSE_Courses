@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Курсы ВШЭ</string>
+    <string name="title_home">Главная</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="title_dashboard">График</string>
+    <string name="title_common">Общее</string>
+    <string name="greeting_text">Постройте свой график прохождения онлайн-курса и получайте напоминания о нем.  Нужно только указать курс и удобное время!</string>
+    <string name="hello_blank_fragment">hi</string>
+    <string name="next">Вперёд</string>
+    <string name="previous">Назад</string>
+    <string name="finish">Закончить</string>
+    <string name="select_day_time">Выберите дни недели и время для занятий</string>
+    <string name="select_course">Укажите онлайн-курс, который вы хотите пройти</string>
+    <string name="hello_title">Привет!</string>
+    <string name="start_title">Получить свой график</string>
+    <string name="select_target">Напишите кратко, для чего вы его будете проходить:</string>
+    <string name="target_title">Ваша цель</string>
+    <string name="select_time_title">Выбрать время</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="status_days_tasks_not_saved">Занятия не заданы</string>
+    <string name="status_days_tasks_saved">Занятия сохранены</string>
+    <string name="warning_little_hours">Кажется вы выбрали слишком мало часов для занятий. Этого может не хватить на успешное прохождение курса.</string>
+    <string name="error_msg">Произошла ошибка :(</string>
+</resources>
