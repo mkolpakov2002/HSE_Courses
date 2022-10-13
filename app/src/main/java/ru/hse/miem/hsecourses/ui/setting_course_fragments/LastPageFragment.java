@@ -3,7 +3,6 @@ package ru.hse.miem.hsecourses.ui.setting_course_fragments;
 import static com.patrykandpatryk.vico.core.entry.EntryListExtensionsKt.entryModelOf;
 
 import android.content.Context;
-import android.graphics.RectF;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,11 +11,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-
-import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import ru.hse.miem.hsecourses.R;
+import ru.hse.miem.hsecourses.graphics.GraphValue;
+import ru.hse.miem.hsecourses.graphics.PopupBarChart;
 import ru.hse.miem.hsecourses.courses.Course;
 import ru.hse.miem.hsecourses.courses.Day;
 import ru.hse.miem.hsecourses.ui.MainActivity;
@@ -36,6 +40,10 @@ public class LastPageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    PopupBarChart graph;
+
+    TextView textViewHoursCount;
 
     //ChartProgressBar equalDaysChartView;
 
@@ -93,35 +101,39 @@ public class LastPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_last_page, container, false);
         Course course = listener.getCourse();
 
-        List<Day> dayList = course.getDayList();
+        List<GraphValue> values = new ArrayList<>();
+
+        LocalDate today = LocalDate.now();
+
+        DayOfWeek dayOfWeek = today.getDayOfWeek();
+
+        //TODO
+        List<Day> dayList = course.getWeekList().get(0).getDayList();
         double[] daysHoursCount = new double[dayList.size()];
+        double totalCount = 0.0;
         for(int i = 0; i<dayList.size(); i++){
+            totalCount += (dayList.get(i).getTasksTimeCount()/(1000*60*60d));
             daysHoursCount[i] = (dayList.get(i).getTasksTimeCount()/(1000*60*60d));
+            GraphValue curr = new GraphValue(i, i, (int) (daysHoursCount[i])*100/24,
+                    dayOfWeek.getValue()-1==dayList.get(i).getDayNumber(),
+                    false);
+            values.add(curr);
         }
 
-        long[] colors = {0xFF68A7AD, 0xFF99C4C8, 0xFFE5CB9F};
+
+        graph = view.findViewById(R.id.customBarchart);
+
+        graph.setGraphValues(values);
+        //graph.setTooltipBg(R.color.transparent);
 
 
+        DecimalFormat decimalFormat = new DecimalFormat( "#.#" );
+        String result = decimalFormat.format(totalCount);
 
-//        chartEntryModel = entryModelOf(
-//                daysHoursCount[0],
-//                daysHoursCount[1],
-//                daysHoursCount[2],
-//                daysHoursCount[3],
-//                daysHoursCount[4],
-//                daysHoursCount[5],
-//                daysHoursCount[6]);
+        textViewHoursCount = view.findViewById(R.id.textViewHoursCount);
+        textViewHoursCount.setText(result + " ч");
 
 
-
-//        AxisRenderer<>
-
-        //equalDaysChartView = view.findViewById(R.id.chartTime);
-
-
-
-
-        //equalDaysChartView.setChart(chart);
 
         return view;
     }

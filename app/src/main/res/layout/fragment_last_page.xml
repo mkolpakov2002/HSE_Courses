@@ -18,6 +18,7 @@
 <!--        android:alpha="0.4"-->
 <!--        android:scaleType="centerCrop"/>-->
 
+
     <TextView
         android:id="@+id/textViewDaySelectTitle3"
         style="@style/TextAppearance.Material3.DisplaySmall"
@@ -49,31 +50,95 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:alpha="200"
+                android:elevation="8dp"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardCornerRadius="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:elevation="8dp"
-                android:padding="8dp"
-                app:cardCornerRadius="16dp"
-                app:contentPadding="8dp"
-                android:focusable="true"
-                android:alpha="200"
                 app:strokeWidth="0dp">
 
-<!--                <com.hadiidbouk.charts.ChartProgressBar-->
-<!--                    android:id="@+id/chartTime"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    android:minHeight="200dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    />-->
+                <!--                <com.hadiidbouk.charts.ChartProgressBar-->
+                <!--                    android:id="@+id/chartTime"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="8dp"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:layout_marginEnd="8dp"-->
+                <!--                    android:minHeight="200dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent"-->
+                <!--                    />-->
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="2dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textViewHoursCount"
+                            style="@style/TextAppearance.Material3.TitleLarge"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="23.5 ч"
+                            android:textColor="@color/colorPrimary"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/title_time_spent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view"
+                            app:layout_constraintTop_toBottomOf="@+id/textViewHoursCount" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ru.hse.miem.hsecourses.graphics.PopupBarChart
+                        android:id="@+id/customBarchart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+
+                        android:padding="32dp"
+                        app:chart_bar_round_corner="true"
+                        app:chart_bar_size="8dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                        app:chart_bar_start_color="@color/colorPrimary"
+                        app:chart_bar_end_color="@color/bg_bar_graph_green_start"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 

@@ -41,7 +41,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle">
+        app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle"
+        android:paddingBottom="48dp"
+        android:clipToPadding="false">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

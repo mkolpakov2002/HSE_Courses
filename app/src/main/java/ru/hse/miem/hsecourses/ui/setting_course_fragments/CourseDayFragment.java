@@ -95,7 +95,8 @@ public class CourseDayFragment extends Fragment {
 
         // data to populate the RecyclerView with
         List<Day> daysList;
-        daysList = listener2.getAllDays();
+        //TODO
+        daysList = listener2.getAllDaysByWeekNumber(0);
 
         adapter = new CourseDayAdapter(view.getContext(), daysList);
 

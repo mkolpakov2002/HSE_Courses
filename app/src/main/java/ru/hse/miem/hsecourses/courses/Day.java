@@ -21,22 +21,12 @@ public class Day implements Serializable {
 
     private String dayName;
 
-    private int courseId;
+    private int weekNumber;
 
     @Ignore
     long tasksTimeCount;
 
-    Day(int dayId, int courseId, List<Task> taskList, int dayNumber, String dayName){
-
-        this.dayId = dayId;
-        this.courseId = courseId;
-        this.dayNumber = dayNumber;
-        this.taskList = taskList;
-        this.dayName = dayName;
-
-    }
     public Day(){
-
         taskList = new ArrayList<>();
 
     }
@@ -73,12 +63,12 @@ public class Day implements Serializable {
         this.dayId = dayId;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setWeekNumber(int weekNumber) {
+        this.weekNumber = weekNumber;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public int getWeekNumber() {
+        return weekNumber;
     }
 
     public void setTasks(List<Task> taskList){

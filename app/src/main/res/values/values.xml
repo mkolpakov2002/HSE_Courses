@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_bar_graph_green_end">#A639D1B4</color>
+    <color name="bg_bar_graph_green_start">#39D1B4</color>
+    <color name="black_2121">#212121</color>
+    <color name="green_end">#05c95b</color>
+    <color name="green_start">#05c95b</color>
+    <color name="grey_a7">#a7aab1</color>
+    <color name="grey_b2b2">#b2b2b2</color>
+    <color name="grey_secondary">#0FFFFFFF</color>
+    <color name="white">#ffffff</color>
+    <color name="white_f0">#f0f0f0</color>
+    <declare-styleable name="PopupBarChart">
+        <!--Chart bar attributes-->
+        <attr format="color" name="chart_bar_start_color"/>
+        <attr format="color" name="chart_bar_end_color"/>
+        <attr format="boolean" name="chart_bar_round_corner"/>
+        <attr format="dimension" name="chart_bar_size"/>
+        <attr format="color" name="chart_bar_secondary_color"/>
+
+        <!--Chart bar bottom text attributes-->
+        <attr format="reference" name="chart_bar_text_color"/>
+        <attr format="dimension" name="chart_bar_text_size"/>
+        <attr format="reference" name="chart_bar_text_family"/>
+
+        <!--Tooltip attributes-->
+        <attr format="reference" name="chart_bar_tooltip_bg_color"/>
+        <attr format="reference" name="chart_bar_tooltip_title_text_color"/>
+        <attr format="dimension" name="chart_bar_tooltip_title_text_size"/>
+        <attr format="reference" name="chart_bar_tooltip_title_text_family"/>
+        <attr format="reference" name="chart_bar_tooltip_subtitle_text_color"/>
+        <attr format="dimension" name="chart_bar_tooltip_subtitle_text_size"/>
+        <attr format="reference" name="chart_bar_tooltip_subtitle_text_family"/>
+
+    </declare-styleable>
+</resources>

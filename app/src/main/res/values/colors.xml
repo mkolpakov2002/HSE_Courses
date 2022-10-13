@@ -8,4 +8,5 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="colorOnPrimary">#e6e6e6</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>

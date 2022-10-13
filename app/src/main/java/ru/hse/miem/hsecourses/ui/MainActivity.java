@@ -21,10 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.LiveData;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavGraph;
@@ -40,15 +39,16 @@ import ru.hse.miem.hsecourses.BuildConfig;
 import ru.hse.miem.hsecourses.Constants;
 import ru.hse.miem.hsecourses.R;
 import ru.hse.miem.hsecourses.broadcasts.AlarmBroadcastReceiver;
-import ru.hse.miem.hsecourses.courses.AppDataBase;
 import ru.hse.miem.hsecourses.courses.Course;
 import ru.hse.miem.hsecourses.courses.CourseViewModel;
 import ru.hse.miem.hsecourses.courses.Day;
 import ru.hse.miem.hsecourses.courses.Task;
+import ru.hse.miem.hsecourses.courses.Week;
 import ru.hse.miem.hsecourses.databinding.ActivityMainBinding;
 import ru.hse.miem.hsecourses.ui.setting_course_fragments.CommunicateData;
 import ru.hse.miem.hsecourses.ui.setting_course_fragments.OpenFragment;
 import ru.hse.miem.hsecourses.ui.setting_course_fragments.SetEnabledNextButton;
+
 
 public class MainActivity extends AppCompatActivity implements
         SetEnabledNextButton,
@@ -84,9 +84,15 @@ public class MainActivity extends AppCompatActivity implements
 
     private CourseViewModel model;
 
+    List<Week> weeks;
+
+    List<Day> days;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SplashScreen.installSplashScreen(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -130,10 +136,6 @@ public class MainActivity extends AppCompatActivity implements
         nextButton = binding.buttonNext;
         prevButton = binding.buttonPrev;
 
-        if(isTestLaunch){
-            setupTestCourses();
-        }
-
         model.getAllCourses().observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(@Nullable final List<Course> words) {
@@ -145,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements
         if (!prefs.getBoolean(Constants.courseIsSavedKey, false)) {
 
             isCourseEditingMode = true;
+
+            if(isTestLaunch){
+                setupTestCourses();
+                //getAllDaysByWeekNumber(0);
+            }
 
             navGraph.setStartDestination(R.id.firstPageFragment);
 
@@ -166,17 +173,80 @@ public class MainActivity extends AppCompatActivity implements
 
             selectedForEducationCourse = null;
 
-            binding.navView.setVisibility(View.VISIBLE);
-            binding.navView.getMenu().clear();
-            binding.navView.inflateMenu(R.menu.bottom_nav_menu);
+            binding.navView.setVisibility(View.GONE);
 
         } else {
+            loadCourseData();
             isCourseEditingMode = false;
             navGraph.setStartDestination(R.id.navigation_home);
 
             setupBottomMenu();
+
         }
         navController.setGraph(navGraph);
+    }
+
+    private void loadCourseData() {
+
+        model.getAllCourses().observe(this, new Observer<List<Course>>() {
+            @Override
+            public void onChanged(@Nullable final List<Course> words) {
+                // Update the cached copy of the words in the adapter.
+                courseList = new ArrayList<>();
+                if(words!=null)
+                    courseList.addAll(words);
+                for(Course c: courseList)
+                    if(c.isSelected())
+                        selectedForEducationCourse = c;
+
+                    if(weeks!=null)
+                        selectedForEducationCourse.setWeekList(weeks);
+
+                    if(days!=null&&weeks!=null) {
+                        for(Day d: days){
+                            selectedForEducationCourse.getWeekList().get(d.getWeekNumber()).addDay(d);
+                        }
+                    }
+            }
+        });
+
+
+        model.getAllWeeks().observe(this, new Observer<List<Week>>() {
+            @Override
+            public void onChanged(@Nullable final List<Week> words) {
+                // Update the cached copy of the words in the adapter.
+                weeks = new ArrayList<>();
+                if(words!=null)
+                    weeks.addAll(words);
+
+
+                if(selectedForEducationCourse!=null)
+                    selectedForEducationCourse.setWeekList(weeks);
+
+
+                if(days!=null&&selectedForEducationCourse!=null) {
+                    for(Day d: days){
+                        selectedForEducationCourse.getWeekList().get(d.getWeekNumber()).addDay(d);
+                    }
+                }
+            }
+        });
+
+        model.getAllDays().observe(this, new Observer<List<Day>>() {
+            @Override
+            public void onChanged(@Nullable final List<Day> words) {
+                // Update the cached copy of the words in the adapter.
+                days = new ArrayList<>();
+                if(words!=null){
+                    days.addAll(words);
+                }
+
+                if(selectedForEducationCourse!=null&&weeks!=null)
+                    for(Day d: days){
+                        selectedForEducationCourse.getWeekList().get(d.getWeekNumber()).addDay(d);
+                    }
+            }
+        });
     }
 
     void setupTestCourses(){
@@ -204,7 +274,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     void setupBottomMenu(){
+        binding.cardView.setVisibility(View.GONE);
         binding.navView.setVisibility(View.VISIBLE);
+        binding.navView.getMenu().clear();
+        binding.navView.inflateMenu(R.menu.bottom_nav_menu);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
@@ -306,6 +379,7 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             default:
                 navController.navigate(R.id.navigation_home, bundle);
+                saveCourse();
                 break;
         }
     }
@@ -335,13 +409,15 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public List<Task> getTasksByDayNumber(int dayNumber) {
-        return selectedForEducationCourse.getDayList().get(dayNumber).getTaskList();
+    public List<Task> getTasksByWeekDayNumber(int dayNumber, int weekNumber) {
+        //TODO
+        return selectedForEducationCourse.getWeekList().get(weekNumber).getDayList().get(dayNumber).getTaskList();
     }
 
     @Override
-    public List<Day> getAllDays() {
-        if(selectedForEducationCourse.getDayList().size()!=7){
+    public List<Day> getAllDaysByWeekNumber(int weekNumber) {
+        //TODO
+        if(selectedForEducationCourse.getWeekList()== null || selectedForEducationCourse.getWeekList().isEmpty()){
             List<Day> newDayList = new ArrayList<>();
 
             Day day1 = new Day();
@@ -378,25 +454,44 @@ public class MainActivity extends AppCompatActivity implements
             day7.setDayName("Воскресенье");
             day7.setDayNumber(6);
             newDayList.add(day7);
+            List<Week> weeks = new ArrayList<>();
+            //TODO
+            for(int i = 0; i < selectedForEducationCourse.getWeekCount(); i++){
+                Week curr = new Week();
+                curr.setWeekNumber(i);
+                curr.setEnded(false);
+                curr.setCourseNumber(selectedForEducationCourse.getCourseId());
+                for(int j = 0; j < 7; j++){
+                    newDayList.get(j).setWeekNumber(i);
+                }
+                curr.setDayList(newDayList);
+                weeks.add(curr);
+            }
 
-            selectedForEducationCourse.setDayList(newDayList);
+            selectedForEducationCourse.setWeekList(weeks);
         }
-        return selectedForEducationCourse.getDayList();
+        //TODO
+        return selectedForEducationCourse.getWeekList().get(0).getDayList();
     }
 
     @Override
-    public void saveDays(List<String> newReminders) {
+    public void saveCourse() {
         App app = (App) getApplication();
+        selectedForEducationCourse.setSelected(true);
+        model.insert(selectedForEducationCourse);
+        model.insertWeeks(selectedForEducationCourse.getWeekList());
+        for(int i = 0; i < selectedForEducationCourse.getWeekCount(); i++)
+            model.insertDays(selectedForEducationCourse.getWeekList().get(i).getDayList());
     }
 
     @Override
     public void saveTaskToDay(int dayNumber, List<Task> taskList) {
-        selectedForEducationCourse.setTasksToDay(dayNumber, taskList);
+        selectedForEducationCourse.getWeekList().get(0).getDayList().get(dayNumber).setTaskList(taskList);
     }
 
     @Override
-    public void saveEditedDay(Day day) {
-        selectedForEducationCourse.updateDay(day);
+    public void saveEditedDayInWeek(int weekNumber, Day day) {
+        selectedForEducationCourse.getWeekList().get(weekNumber).updateDay(day);
     }
 
     @Override

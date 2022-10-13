@@ -27,25 +27,28 @@ public class Course implements Serializable {
     private long minCourseTime;
 
     @Ignore
-    private List<Day> dayList;
+    private List<Week> weekList;
 
     @Ignore
     private Date creationTime;
 
     private int weekCount;
 
+    boolean isSelected;
+
 
     public Course(int courseId, String courseName, String courseTarget, int hoursCount,
-                  int endedHoursCount, List<Day> dayList, Date creationTime, int weekCount){
+                  int endedHoursCount, List<Week> weekList, Date creationTime, int weekCount, boolean isSelected){
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseTarget = courseTarget;
         this.hoursCount = hoursCount;
         this.endedHoursCount = endedHoursCount;
-        this.dayList = dayList;
+        this.weekList = weekList;
         this.creationTime = creationTime;
         minCourseTime = 1000000;
         this.weekCount = weekCount;
+        this.isSelected = isSelected;
     }
 
     public Course(){
@@ -53,9 +56,19 @@ public class Course implements Serializable {
         courseTarget = "";
         hoursCount = 100;
         endedHoursCount = 0;
-        dayList = new ArrayList<>();
+        weekList = new ArrayList<>();
         creationTime = Calendar.getInstance().getTime();
         minCourseTime = 1000000;
+        weekCount = 16;
+        isSelected = false;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public String getCourseName() {
@@ -98,29 +111,12 @@ public class Course implements Serializable {
         this.endedHoursCount = endedHoursCount;
     }
 
-    public List<Day> getDayList() {
-        return dayList;
+    public List<Week> getWeekList() {
+        return weekList;
     }
 
-    public void setDayList(List<Day> dayList) {
-        this.dayList = dayList;
-    }
-
-    public void setTasksToDay(int dayNumber, List<Task> taskList){
-        for(Day day: dayList){
-            if(day.getDayNumber() == dayNumber){
-                day.setTasks(taskList);
-            }
-        }
-    }
-
-    public void updateDay(Day editedDay){
-        for(Day day: dayList){
-            if(day.getDayNumber() == editedDay.getDayNumber()){
-                dayList.remove(day);
-                dayList.add(editedDay);
-            }
-        }
+    public void setWeekList(List<Week> weekList) {
+        this.weekList = weekList;
     }
 
     public Date getCreationTime() {

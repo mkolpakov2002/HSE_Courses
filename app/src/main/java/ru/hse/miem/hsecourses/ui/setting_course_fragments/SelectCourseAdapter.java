@@ -90,8 +90,11 @@ public class SelectCourseAdapter extends RecyclerView.Adapter<SelectCourseAdapte
                         parentView.setStrokeColor(Color.BLUE);
                         parentView.getBackground().setAlpha(255);
                         imageViewCourseSelected.setVisibility(View.VISIBLE);
-                        if(copyOfLastCheckedPosition!=lastCheckedPosition)
+                        if(copyOfLastCheckedPosition!=lastCheckedPosition){
                             notifyItemChanged(copyOfLastCheckedPosition);
+
+                        }
+
                         mClickListener.onItemClick(parentView, coursesList.get(getBindingAdapterPosition()).getCourseId());
                     }
                 }

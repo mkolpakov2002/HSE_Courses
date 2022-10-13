@@ -7,11 +7,11 @@ import ru.hse.miem.hsecourses.courses.Day;
 import ru.hse.miem.hsecourses.courses.Task;
 
 public interface CommunicateData {
-    List<Task> getTasksByDayNumber(int dayNumber);
-    List<Day> getAllDays();
-    void saveDays(List<String> newReminders);
+    List<Task> getTasksByWeekDayNumber(int dayNumber, int weekNumber);
+    List<Day> getAllDaysByWeekNumber(int weekNumber);
+    void saveCourse();
     void saveTaskToDay(int dayNumber, List<Task> tasks);
-    void saveEditedDay(Day day);
+    void saveEditedDayInWeek(int weekNumber, Day day);
     Course getCourse();
     void setUpdatedCourse(Course course);
     List<Course> availableCourses();

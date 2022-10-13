@@ -23,4 +23,14 @@
     <string name="status_days_tasks_saved">Занятия сохранены</string>
     <string name="warning_little_hours">Кажется вы выбрали слишком мало часов для занятий. Этого может не хватить на успешное прохождение курса.</string>
     <string name="error_msg">Произошла ошибка :(</string>
+    <string name="today">Сегодня</string>
+    <string name="day_mo">Пн</string>
+    <string name="day_tu">Вт</string>
+    <string name="day_we">Ср</string>
+    <string name="day_th">Чт</string>
+    <string name="day_fr">Пт</string>
+    <string name="day_sa">Сб</string>
+    <string name="day_su">Вс</string>
+    <string name="title_time_spent">Суммарно затрачиваемое время на каждую неделю</string>
+
 </resources>

@@ -10,5 +10,5 @@ public class Constants {
     public static final int courseSettingPagesCount = 5;
 
     public static Boolean isTestLaunch = true;
-    
+
 }

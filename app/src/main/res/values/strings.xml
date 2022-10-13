@@ -23,5 +23,14 @@
     <string name="status_days_tasks_saved">Classes saved</string>
     <string name="warning_little_hours">It seems you have chosen too few hours for classes. This may not be enough to successfully complete the course.</string>
     <string name="error_msg">An error occurred :(</string>
+    <string name="today">Today</string>
+    <string name="day_mo">Mo</string>
+    <string name="day_tu">Tu</string>
+    <string name="day_we">We</string>
+    <string name="day_th">Th</string>
+    <string name="day_fr">Fr</string>
+    <string name="day_sa">Sa</string>
+    <string name="day_su">Su</string>
+    <string name="title_time_spent">Total time spent for each week</string>
 
 </resources>

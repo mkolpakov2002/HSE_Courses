@@ -75,7 +75,8 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
 
             dayTaskList = new ArrayList<>();
 
-            dayTaskList = listener.getTasksByDayNumber(selectedDay);
+            //TODO
+            dayTaskList = listener.getTasksByWeekDayNumber(selectedDay, 0);
 
             textViewIsAnyReminder = v.findViewById(R.id.textView);
 
@@ -134,7 +135,8 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
 
     void onRefresh(){
         dayTaskList = new ArrayList<>();
-        dayTaskList = listener.getTasksByDayNumber(selectedDay);
+        //TODO
+        dayTaskList = listener.getTasksByWeekDayNumber(selectedDay, 0);
         adapter = new DayTasksAdapter(context, dayTaskList);
         adapter.setOnDeleteClickedListener(this);
         recyclerViewTasks.setAdapter(adapter);

@@ -15,13 +15,8 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"/>
         <action
-            android:id="@+id/action_navigation_home_to_navigation_notifications"
-            app:destination="@id/navigation_notifications"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"/>
-        <action
             android:id="@+id/action_navigation_home_to_commonFragment"
-            app:destination="@id/commonFragment"
+            app:destination="@id/navigation_common"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"/>
         <action
@@ -40,30 +35,12 @@
             android:id="@+id/action_navigation_dashboard_to_navigation_home"
             app:destination="@id/navigation_home" />
         <action
-            android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
-            app:destination="@id/navigation_notifications" />
-        <action
             android:id="@+id/action_navigation_dashboard_to_commonFragment"
-            app:destination="@id/commonFragment" />
+            app:destination="@id/navigation_common" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="ru.hse.miem.hsecourses.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" >
-        <action
-            android:id="@+id/action_navigation_notifications_to_navigation_home"
-            app:destination="@id/navigation_home" />
-        <action
-            android:id="@+id/action_navigation_notifications_to_navigation_dashboard"
-            app:destination="@id/navigation_graph" />
-        <action
-            android:id="@+id/action_navigation_notifications_to_commonFragment"
-            app:destination="@id/commonFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/commonFragment"
+        android:id="@+id/navigation_common"
         android:name="ru.hse.miem.hsecourses.ui.common.CommonFragment"
         android:label="fragment_common"
         tools:layout="@layout/fragment_common" >
@@ -73,9 +50,6 @@
         <action
             android:id="@+id/action_commonFragment_to_navigation_dashboard"
             app:destination="@id/navigation_graph" />
-        <action
-            android:id="@+id/action_commonFragment_to_navigation_notifications"
-            app:destination="@id/navigation_notifications" />
     </fragment>
     <fragment
         android:id="@+id/firstPageFragment"
