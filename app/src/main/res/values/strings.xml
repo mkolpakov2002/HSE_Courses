@@ -12,8 +12,8 @@
     <string name="finish">Finish</string>
     <string name="select_day_time">Please select day and time for your lessons</string>
     <string name="select_course">Specify the online course you want to take</string>
-    <string name="hello_title">Hello!</string>
-    <string name="start_title">Get your schedule</string>
+    <string name="hello_title">Find the way to manage your education time</string>
+    <string name="start_title">Get started</string>
     <string name="select_target">Write briefly why you will take it:</string>
     <string name="target_title">Your target</string>
     <string name="select_time_title">Select time</string>
@@ -31,6 +31,27 @@
     <string name="day_fr">Fr</string>
     <string name="day_sa">Sa</string>
     <string name="day_su">Su</string>
-    <string name="title_time_spent">Total time spent for each week</string>
+    <string name="title_time_spent">Total time spent for each module</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="channel_name">HSE Courses</string>
+    <string name="channel_description">It\'s time for learning!</string>
+    <string name="notify_error" >Without permission to notify, this app will not work properly!</string>
+    <string name="notify_text" >Stay ready for all your classes. You just need to turn on notifications! Otherwise, the application will not work correctly.</string>
+    <string name="notify_title" >Get notified!</string>
+    <string name="go_next_perm" >I\'m in</string>
+    <string name="skip">Skip</string>
 
 </resources>

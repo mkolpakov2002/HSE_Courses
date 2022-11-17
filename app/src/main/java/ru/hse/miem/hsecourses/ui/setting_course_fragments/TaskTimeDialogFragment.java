@@ -6,11 +6,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,6 +35,8 @@ public class TaskTimeDialogFragment extends DialogFragment {
     TimeRangePicker timeRangePicker;
     LinearLayout startTimeLayout;
     LinearLayout endTimeLayout;
+
+    ConstraintLayout notCorrectTimeLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -66,6 +70,8 @@ public class TaskTimeDialogFragment extends DialogFragment {
             startTimeLayout = v.findViewById(R.id.start_task_layout);
             endTimeLayout = v.findViewById(R.id.stop_task_layout);
 
+            notCorrectTimeLayout = v.findViewById(R.id.warningLayout);
+
 
             startTime.setText(timeRangePicker.getStartTime().getHour()+":"+timeRangePicker.getStartTime().getMinute());
 
@@ -75,11 +81,13 @@ public class TaskTimeDialogFragment extends DialogFragment {
                 @Override
                 public void onStartTimeChange(@NonNull TimeRangePicker.Time time) {
                     startTime.setText(timeRangePicker.getStartTime().getHour()+":"+timeRangePicker.getStartTime().getMinute());
+                    checkIsCorrectTime();
                 }
 
                 @Override
                 public void onEndTimeChange(@NonNull TimeRangePicker.Time time) {
                     endTime.setText(timeRangePicker.getEndTime().getHour()+":"+timeRangePicker.getEndTime().getMinute());
+                    checkIsCorrectTime();
                 }
 
                 @Override
@@ -94,7 +102,7 @@ public class TaskTimeDialogFragment extends DialogFragment {
                     if(thumb != TimeRangePicker.Thumb.BOTH) {
                         animate(thumb, true);
                     }
-                    return  true;
+                    return true;
                 }
 
                 @Override
@@ -173,6 +181,24 @@ public class TaskTimeDialogFragment extends DialogFragment {
                 .alpha(alpha)
             .setDuration(300)
                 .start();
+    }
+
+    void checkIsCorrectTime(){
+        if(timeRangePicker.getStartTime().getTotalMinutes()>timeRangePicker.getEndTime().getTotalMinutes()){
+            notCorrectTimeLayout.setVisibility(View.VISIBLE);
+            AlertDialog d = (AlertDialog) getDialog();
+            if (d != null) {
+                Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+                positiveButton.setEnabled(false);
+            }
+        } else {
+            notCorrectTimeLayout.setVisibility(View.GONE);
+            AlertDialog d = (AlertDialog) getDialog();
+            if (d != null) {
+                Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+                positiveButton.setEnabled(true);
+            }
+        }
     }
 
 

@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Уведомления">
+
+        <SwitchPreferenceCompat
+            app:key="alarmMode"
+            app:summaryOff="Напоминания выключены"
+            app:summaryOn="Интенсивное напоминание со звонком перед занятием"
+            app:title="Режим напоминаний" />
+
+
+        <ListPreference
+            app:defaultValue="default"
+            app:entries="@array/alarm_time_entries"
+            app:entryValues="@array/alarm_time_values"
+            app:key="alarm_time"
+            app:title="Напоминание о занятии"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Настройки интерфейса">
+
+        <ListPreference
+            app:defaultValue="default"
+            app:entries="@array/adapter_entries"
+            app:entryValues="@array/adapter_values"
+            app:key="adapter"
+            app:title="Вид главного экрана"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="darkTheme"
+            app:title="Включить тёмную тему" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

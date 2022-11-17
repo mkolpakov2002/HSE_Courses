@@ -32,12 +32,11 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
     private CommunicateData listener;
     List<Task> dayTaskList;
     TextView textViewIsAnyReminder;
-    int selectedDay;
+    int selectedDayNumber;
     MaterialButton addNewTask;
     RecyclerView recyclerViewTasks;
 
     DayTasksAdapter adapter;
-    private OpenFragment listener2;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -45,7 +44,6 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
         try {
             this.context = context;
             listener = (CommunicateData) context;
-            listener2 = (OpenFragment) context;
         } catch (ClassCastException castException) {
             /** The activity does not implement the listener. */
         }
@@ -66,18 +64,14 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
                 @Override
                 public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
                     Task newTask = (Task) bundle.getSerializable("task");
-                    dayTaskList.add(newTask);
+                    dayTaskList.add(0, newTask);
+                    adapter.notifyItemInserted(0);
                     onRefresh();
                 }
             });
 
-            selectedDay = getArguments().getInt("dayNumber");
-
-            dayTaskList = new ArrayList<>();
-
-            //TODO
-            dayTaskList = listener.getTasksByWeekDayNumber(selectedDay, 0);
-
+            selectedDayNumber = getArguments().getInt("dayNumber");
+            dayTaskList = listener.getTasksByDayNumber(selectedDayNumber);
             textViewIsAnyReminder = v.findViewById(R.id.textView);
 
             addNewTask = v.findViewById(R.id.buttonAddTimeReminder);
@@ -86,21 +80,24 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
                 public void onClick(View view) {
 
                     Bundle b = new Bundle();
-                    b.putInt("dayNumber", selectedDay);
+                    b.putInt("dayNumber", selectedDayNumber);
                     Navigation.findNavController(requireParentFragment().requireView()).navigate(R.id.taskTimeDialogFragment, b);
                 }
             });
 
             recyclerViewTasks = v.findViewById(R.id.tasksList);
             recyclerViewTasks.setLayoutManager(new LinearLayoutManager(context));
+            adapter = new DayTasksAdapter(v.getContext(), dayTaskList);
+            adapter.setOnDeleteClickedListener(this);
+            recyclerViewTasks.setAdapter(adapter);
             onRefresh();
             alertDialogBuilder.setPositiveButton(R.string.ok,  new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // on success
-                    listener.saveTaskToDay(selectedDay, dayTaskList);
+                    listener.saveTaskToDay(selectedDayNumber, dayTaskList);
                     Bundle b = new Bundle();
-                    b.putInt("dayNumber", selectedDay);
+                    b.putInt("dayNumber", selectedDayNumber);
                     getParentFragmentManager().setFragmentResult("requestKeyDialogClosed", b);
                 }
             });
@@ -134,12 +131,6 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
     }
 
     void onRefresh(){
-        dayTaskList = new ArrayList<>();
-        //TODO
-        dayTaskList = listener.getTasksByWeekDayNumber(selectedDay, 0);
-        adapter = new DayTasksAdapter(context, dayTaskList);
-        adapter.setOnDeleteClickedListener(this);
-        recyclerViewTasks.setAdapter(adapter);
         if(dayTaskList.size()>0){
             textViewIsAnyReminder.setVisibility(View.GONE);
         } else {

@@ -36,20 +36,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeWidth="0dp">
 
-                <!--                <com.hadiidbouk.charts.ChartProgressBar-->
-                <!--                    android:id="@+id/chartTime"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="8dp"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:layout_marginEnd="8dp"-->
-                <!--                    android:minHeight="200dp"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toTopOf="parent"-->
-                <!--                    />-->
-
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -226,6 +212,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Ваша статистика"
+        android:textColor="@color/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

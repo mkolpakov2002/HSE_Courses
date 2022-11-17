@@ -12,12 +12,12 @@
     <string name="finish">Закончить</string>
     <string name="select_day_time">Выберите дни недели и время для занятий</string>
     <string name="select_course">Укажите онлайн-курс, который вы хотите пройти</string>
-    <string name="hello_title">Привет!</string>
-    <string name="start_title">Получить свой график</string>
+    <string name="hello_title">Найдите способ управлять своим учебным временем</string>
+    <string name="start_title">Начать</string>
     <string name="select_target">Напишите кратко, для чего вы его будете проходить:</string>
     <string name="target_title">Ваша цель</string>
     <string name="select_time_title">Выбрать время</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Отмена</string>
     <string name="ok">OK</string>
     <string name="status_days_tasks_not_saved">Занятия не заданы</string>
     <string name="status_days_tasks_saved">Занятия сохранены</string>
@@ -32,5 +32,12 @@
     <string name="day_sa">Сб</string>
     <string name="day_su">Вс</string>
     <string name="title_time_spent">Суммарно затрачиваемое время на каждую неделю</string>
+    <string name="channel_name">HSE Courses</string>
+    <string name="channel_description">It\'s time for learning!</string>
+    <string name="notify_error" >Без разрешения на уведомление это приложение будет работать неправильно!</string>
+    <string name="notify_text" >Оставайтесь готовыми ко всем своим занятиям. Нужно только включить уведомления! Иначе приложение будет работать некорректно.</string>
+    <string name="notify_title" >Получите уведомление!</string>
+    <string name="go_next_perm" >Настройки</string>
+    <string name="skip">Пропустить</string>
 
 </resources>

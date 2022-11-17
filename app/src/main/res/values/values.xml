@@ -10,6 +10,7 @@
     <color name="grey_secondary">#0FFFFFFF</color>
     <color name="white">#ffffff</color>
     <color name="white_f0">#f0f0f0</color>
+    <color name="orange">#FF9800</color>
     <declare-styleable name="PopupBarChart">
         <!--Chart bar attributes-->
         <attr format="color" name="chart_bar_start_color"/>

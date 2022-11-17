@@ -11,11 +11,14 @@ public class Repository {
     private CourseDao mCourseDao;
     private LiveData<List<Course>> mAllCourses;
 
-    private WeekDao mWeeksDao;
-    private LiveData<List<Week>> mAllWeeks;
+    private ModuleDao mWeeksDao;
+    private LiveData<List<Module>> mAllWeeks;
 
     private DayDao mDaysDao;
     private LiveData<List<Day>> mAllDays;
+
+    private TopicDao mTopicDao;
+    private LiveData<List<Topic>> mAllTopics;
 
     public Repository(Application application) {
         AppDataBase db = AppDataBase.getAppDb(application);
@@ -27,13 +30,20 @@ public class Repository {
 
         mDaysDao = db.getDaysDao();
         mAllDays = mDaysDao.getAllDays();
+
+        mTopicDao = db.getTopicsDao();
+        mAllTopics = mTopicDao.getAllTopicsList();
+    }
+
+    public LiveData<List<Topic>> getAllTopics() {
+        return mAllTopics;
     }
 
     public LiveData<List<Course>> getAllCourses() {
         return mAllCourses;
     }
 
-    public LiveData<List<Week>> getAllWeeks() {
+    public LiveData<List<Module>> getAllModules() {
         return mAllWeeks;
     }
 
@@ -41,12 +51,16 @@ public class Repository {
         return mAllDays;
     }
 
+    public void insertTopics(List<Topic> topics) {
+        new insertAsyncTaskTopic(mTopicDao).execute(topics);
+    }
+
     public void insert (Course word) {
         new insertAsyncTaskCourse(mCourseDao).execute(word);
     }
 
-    public void insertWeeks (List<Week> weeks) {
-        new insertAsyncTaskWeek(mWeeksDao).execute(weeks);
+    public void insertWeeks (List<Module> modules) {
+        new insertAsyncTaskWeek(mWeeksDao).execute(modules);
     }
 
     public void insertDays (List<Day> days) {
@@ -54,7 +68,7 @@ public class Repository {
     }
 
     public void clear(){
-        new clearAsyncTask(mCourseDao, mWeeksDao, mDaysDao).execute();
+        new clearAsyncTask(mCourseDao, mWeeksDao, mDaysDao, mTopicDao).execute();
     }
 
     private static class insertAsyncTaskCourse extends AsyncTask<Course, Void, Void> {
@@ -74,19 +88,36 @@ public class Repository {
     }
 
 
-    private static class insertAsyncTaskWeek extends AsyncTask<List<Week>, Void, Void> {
+    private static class insertAsyncTaskWeek extends AsyncTask<List<Module>, Void, Void> {
 
-        private WeekDao mAsyncTaskDao;
+        private ModuleDao mAsyncTaskDao;
 
         @Deprecated
-        insertAsyncTaskWeek(WeekDao dao) {
+        insertAsyncTaskWeek(ModuleDao dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(final List<Week>... params) {
-            for(Week curr: params[0])
+        protected Void doInBackground(final List<Module>... params) {
+            for(Module curr: params[0])
                 mAsyncTaskDao.insertDataIntoWeeksList(curr);
+            return null;
+        }
+    }
+
+    private static class insertAsyncTaskTopic extends AsyncTask<List<Topic>, Void, Void> {
+
+        private TopicDao mAsyncTaskDao;
+
+        @Deprecated
+        insertAsyncTaskTopic(TopicDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final List<Topic>... params) {
+            for(Topic curr: params[0])
+                mAsyncTaskDao.insertDataIntoTopicList(curr);
             return null;
         }
     }
@@ -112,15 +143,18 @@ public class Repository {
 
         private CourseDao courseDao;
 
-        private WeekDao weekDao;
+        private ModuleDao moduleDao;
 
         private DayDao dayDao;
 
+        private TopicDao topicDao;
+
         @Deprecated
-        clearAsyncTask(CourseDao dao, WeekDao dao2, DayDao dao3) {
+        clearAsyncTask(CourseDao dao, ModuleDao dao2, DayDao dao3, TopicDao dao4) {
             courseDao = dao;
-            weekDao = dao2;
+            moduleDao = dao2;
             dayDao = dao3;
+            topicDao = dao4;
         }
 
 
@@ -132,8 +166,9 @@ public class Repository {
         @Override
         protected Void doInBackground(Void... voids) {
             courseDao.clearTable();
-            weekDao.truncateTheList();
+            moduleDao.truncateTheList();
             dayDao.truncateTheList();
+            topicDao.truncateTheList();
             return null;
         }
     }

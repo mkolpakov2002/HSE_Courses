@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.mahozad.android.PieChart;
-import ru.hse.miem.hsecourses.R;
 import ru.hse.miem.hsecourses.courses.Course;
 import ru.hse.miem.hsecourses.courses.Day;
 import ru.hse.miem.hsecourses.databinding.FragmentGraphicsBinding;
@@ -76,7 +75,7 @@ public class GraphicsFragment extends Fragment {
         DayOfWeek dayOfWeek = today.getDayOfWeek();
 
         //TODO
-        List<Day> dayList = course.getWeekList().get(0).getDayList();
+        List<Day> dayList = listener.getAllDays();
         double[] daysHoursCount = new double[dayList.size()];
         double totalCount = 0.0;
         for(int i = 0; i<dayList.size(); i++){

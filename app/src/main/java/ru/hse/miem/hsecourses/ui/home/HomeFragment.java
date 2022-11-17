@@ -5,40 +5,42 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.hse.miem.hsecourses.Constants;
+import ru.hse.miem.hsecourses.R;
 import ru.hse.miem.hsecourses.courses.Course;
-import ru.hse.miem.hsecourses.courses.CourseViewModel;
 import ru.hse.miem.hsecourses.courses.Day;
-import ru.hse.miem.hsecourses.courses.Week;
+import ru.hse.miem.hsecourses.courses.Module;
+import ru.hse.miem.hsecourses.courses.Topic;
 import ru.hse.miem.hsecourses.databinding.FragmentHomeBinding;
 import ru.hse.miem.hsecourses.ui.setting_course_fragments.CommunicateData;
-import ru.hse.miem.hsecourses.ui.setting_course_fragments.OpenFragment;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeAdapter.ItemClickListener {
 
     private FragmentHomeBinding binding;
 
     private CommunicateData listener;
 
     Course selectedForEducationCourse;
-    List<Week> weeks;
+    List<Module> modules;
+    List<Topic> topics;
     List<Day> days;
 
     HomeViewModel model;
     RecyclerView weekRecycle;
+    HomeAdapter adapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -52,8 +54,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -63,10 +63,13 @@ public class HomeFragment extends Fragment {
         loadCourseData();
 
         weekRecycle = binding.recyclerView;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
-        //linearLayoutManager.setReverseLayout(true);
-        //linearLayoutManager.setStackFromEnd(true);
-        weekRecycle.setLayoutManager(linearLayoutManager);
+
+        if(listener.getAdapterMode()!=Constants.adapterHomeSimple){
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
+            linearLayoutManager.setReverseLayout(true);
+            linearLayoutManager.setStackFromEnd(true);
+            weekRecycle.setLayoutManager(linearLayoutManager);
+        }
 
         return root;
     }
@@ -77,44 +80,65 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final List<Course> words) {
                 // Update the cached copy of the words in the adapter.
+                if(words==null || words.isEmpty())
+                    selectedForEducationCourse = new Course();
+
                 if(words!=null)
                     for(Course c: words)
                         if(c.isSelected())
                             selectedForEducationCourse = c;
 
-                if(weeks!=null)
-                    selectedForEducationCourse.setWeekList(weeks);
+                if(modules !=null && words!=null)
+                    selectedForEducationCourse.setModuleList(modules);
 
-                if(days!=null&&weeks!=null) {
-                    for(Day d: days){
-                        selectedForEducationCourse.getWeekList().get(d.getWeekNumber()).addDay(d);
+                if(topics!=null&& modules !=null && words!=null) {
+                    for(Topic d: topics){
+                        selectedForEducationCourse.getModuleList().get(d.getModuleNumber()).addTopic(d);
                     }
                 }
-                if(selectedForEducationCourse!=null&&weeks!=null&&days!=null)
+                if(selectedForEducationCourse!=null&& modules !=null&&topics!=null && words!=null)
                     refreshAdapter();
             }
         });
 
 
-        model.getAllWeeks().observe(requireActivity(), new Observer<List<Week>>() {
+        model.getAllModules().observe(requireActivity(), new Observer<List<Module>>() {
             @Override
-            public void onChanged(@Nullable final List<Week> words) {
+            public void onChanged(@Nullable final List<Module> words) {
                 // Update the cached copy of the words in the adapter.
-                weeks = new ArrayList<>();
+                modules = new ArrayList<>();
                 if(words!=null)
-                    weeks.addAll(words);
+                    modules.addAll(words);
 
 
-                if(selectedForEducationCourse!=null)
-                    selectedForEducationCourse.setWeekList(weeks);
+                if(selectedForEducationCourse!=null && words!=null)
+                    selectedForEducationCourse.setModuleList(modules);
 
 
-                if(days!=null&&selectedForEducationCourse!=null) {
-                    for(Day d: days){
-                        selectedForEducationCourse.getWeekList().get(d.getWeekNumber()).addDay(d);
+                if(topics!=null&&selectedForEducationCourse!=null && words!=null) {
+                    for(Topic d: topics){
+                        selectedForEducationCourse.getModuleList().get(d.getModuleNumber()).addTopic(d);
                     }
                 }
-                if(selectedForEducationCourse!=null&&weeks!=null&&days!=null)
+                if(selectedForEducationCourse!=null&& modules !=null&&topics!=null && words!=null)
+                    refreshAdapter();
+            }
+        });
+
+        model.getAllTopics().observe(requireActivity(), new Observer<List<Topic>>() {
+            @Override
+            public void onChanged(@Nullable final List<Topic> words) {
+                // Update the cached copy of the words in the adapter.
+                topics = new ArrayList<>();
+                if(words!=null){
+                    topics.addAll(words);
+                }
+
+                if(selectedForEducationCourse!=null&& modules !=null && words!=null)
+                    for(Topic d: topics){
+                        selectedForEducationCourse.getModuleList().get(d.getModuleNumber()).addTopic(d);
+                    }
+                if(selectedForEducationCourse!=null&& modules !=null&&days!=null && words!=null)
                     refreshAdapter();
             }
         });
@@ -127,21 +151,24 @@ public class HomeFragment extends Fragment {
                 if(words!=null){
                     days.addAll(words);
                 }
-
-                if(selectedForEducationCourse!=null&&weeks!=null)
-                    for(Day d: days){
-                        selectedForEducationCourse.getWeekList().get(d.getWeekNumber()).addDay(d);
-                    }
-                if(selectedForEducationCourse!=null&&weeks!=null&&days!=null)
-                    refreshAdapter();
             }
         });
     }
 
     private void refreshAdapter() {
-        HomeAdapter adapter = new HomeAdapter(requireContext(), selectedForEducationCourse.getWeekList());
+        adapter = new HomeAdapter(requireContext(), selectedForEducationCourse.getModuleList(),
+                listener.getAdapterMode());
 
         weekRecycle.setAdapter(adapter);
+
+        adapter.setClickListener(this);
+
+        weekRecycle.post(new Runnable() {
+            @Override
+            public void run() {
+                weekRecycle.smoothScrollToPosition(0);
+            }
+        });
     }
 
     @Override
@@ -149,4 +176,12 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onItemClick(View view, Module selected) {
+        Bundle b = new Bundle();
+        b.putSerializable("selected", selected);
+        NavHostFragment.findNavController(this).navigate(R.id.moduleFragment, b);
+    }
+
 }

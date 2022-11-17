@@ -108,7 +108,7 @@ public class LastPageFragment extends Fragment {
         DayOfWeek dayOfWeek = today.getDayOfWeek();
 
         //TODO
-        List<Day> dayList = course.getWeekList().get(0).getDayList();
+        List<Day> dayList = listener.getAllDays();
         double[] daysHoursCount = new double[dayList.size()];
         double totalCount = 0.0;
         for(int i = 0; i<dayList.size(); i++){

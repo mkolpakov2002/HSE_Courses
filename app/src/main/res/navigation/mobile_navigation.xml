@@ -24,6 +24,9 @@
             app:destination="@id/firstPageFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_home_to_moduleFragment"
+            app:destination="@id/moduleFragment" />
     </fragment>
 
     <fragment
@@ -50,6 +53,9 @@
         <action
             android:id="@+id/action_commonFragment_to_navigation_dashboard"
             app:destination="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_navigation_common_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/firstPageFragment"
@@ -61,6 +67,9 @@
             app:destination="@id/courseSelectFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_firstPageFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment" />
     </fragment>
     <fragment
         android:id="@+id/courseSelectFragment"
@@ -146,4 +155,33 @@
             android:id="@+id/action_textDialogFragment_to_courseDayFragment"
             app:destination="@id/courseDayFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/moduleFragment"
+        android:name="ru.hse.miem.hsecourses.ui.module.ModuleFragment"
+        android:label="fragment_module"
+        tools:layout="@layout/fragment_module" >
+        <action
+            android:id="@+id/action_moduleFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.hse.miem.hsecourses.ui.settings.SettingsFragment"
+        android:label="SettingsFragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_navigation_common"
+            app:destination="@id/navigation_common" />
+    </fragment>
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="ru.hse.miem.hsecourses.ui.PermissionFragment"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" >
+        <action
+            android:id="@+id/action_permissionFragment_to_firstPageFragment"
+            app:destination="@id/firstPageFragment" />
+        <action
+            android:id="@+id/action_permissionFragment_to_courseSelectFragment"
+            app:destination="@id/courseSelectFragment" />
+    </fragment>
 </navigation>

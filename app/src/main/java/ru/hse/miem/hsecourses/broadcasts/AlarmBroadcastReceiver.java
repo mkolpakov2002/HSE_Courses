@@ -26,8 +26,8 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, BuildConfig.APPLICATION_ID)
                 .setSmallIcon(R.drawable.ic_splash)
-                .setContentTitle("Foxandroid Alarm Manager")
-                .setContentText("Subscribe for android related content")
+                .setContentTitle(context.getString(R.string.channel_name))
+                .setContentText(context.getString(R.string.channel_description))
                 .setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

@@ -18,22 +18,20 @@
         android:text="@string/select_target"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/colorOnPrimary" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/courseTargetText"
         style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:gravity="start"
         android:hint="@string/target_title"
-        android:textColorHint="@color/colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle2"
-        android:textColor="@color/colorOnPrimary"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle2" />
 
 <!--    <ImageView-->
 <!--        android:id="@+id/imageView5"-->

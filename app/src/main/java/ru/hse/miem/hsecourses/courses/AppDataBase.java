@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Course.class, Task.class, Day.class, Week.class}, version = 1, exportSchema = false)
+@Database(entities = {Course.class, Task.class, Day.class, Module.class, Topic.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {
 
@@ -30,7 +30,9 @@ public abstract class AppDataBase extends RoomDatabase {
 
     public abstract CourseDao getCourseDao();
 
-    public abstract WeekDao getWeeksDao();
+    public abstract ModuleDao getWeeksDao();
 
     public abstract DayDao getDaysDao();
+
+    public abstract TopicDao getTopicsDao();
 }

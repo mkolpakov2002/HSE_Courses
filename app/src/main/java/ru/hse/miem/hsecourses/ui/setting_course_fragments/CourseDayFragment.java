@@ -19,11 +19,6 @@ import java.util.List;
 import ru.hse.miem.hsecourses.R;
 import ru.hse.miem.hsecourses.courses.Day;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CourseDayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CourseDayFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -34,10 +29,6 @@ public class CourseDayFragment extends Fragment {
     RecyclerView recyclerViewDays;
     CourseDayAdapter adapter;
     int dayNumber;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private CommunicateData listener2;
     private OpenFragment listener;
@@ -57,31 +48,9 @@ public class CourseDayFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CourseDayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CourseDayFragment newInstance(String param1, String param2) {
-        CourseDayFragment fragment = new CourseDayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -95,8 +64,7 @@ public class CourseDayFragment extends Fragment {
 
         // data to populate the RecyclerView with
         List<Day> daysList;
-        //TODO
-        daysList = listener2.getAllDaysByWeekNumber(0);
+        daysList = listener2.getAllDays();
 
         adapter = new CourseDayAdapter(view.getContext(), daysList);
 
@@ -113,7 +81,7 @@ public class CourseDayFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
                 if(bundle.getBoolean("isPositive", false))
-                listener.openNextFragment(null);
+                    listener.openNextFragment(null);
             }
         });
 
@@ -124,7 +92,6 @@ public class CourseDayFragment extends Fragment {
                 b.putInt("dayNumber", position);
                 Navigation.findNavController(view).navigate(R.id.courseTimeReminderDialogFragment, b);
                 dayNumber = position;
-                //Toast.makeText(requireContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
             }
         });
 

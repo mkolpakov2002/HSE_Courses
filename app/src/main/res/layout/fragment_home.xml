@@ -29,16 +29,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/colorOnPrimary"/>
+        android:textColor="@color/colorOnPrimary"
+        android:textSize="32sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="80dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle4"
-        tools:listitem="@layout/recycle_view_week_item"
-        app:reverseLayout="true"/>
+        tools:listitem="@layout/recycle_view_module_item_simple" />
 </androidx.constraintlayout.widget.ConstraintLayout>

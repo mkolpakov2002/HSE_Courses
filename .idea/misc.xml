@@ -41,20 +41,28 @@
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_course_target.xml" value="0.176" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_course_time.xml" value="0.25" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_first_page.xml" value="0.25" />
-        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_graphics.xml" value="0.2" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_graphics.xml" value="0.536" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_last_page.xml" value="0.176" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_module.xml" value="0.25" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/launch_screen.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/mtrl_calendar_month.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_course_select.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_day_button_item.xml" value="0.25" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_day_item.xml" value="0.25" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_module_item.xml" value="0.25" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_module_item_planet.xml" value="0.72" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_module_item_simple.xml" value="0.264" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_time_item.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/recycle_view_week_item.xml" value="0.264" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/splash_screem.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/layout/splash_screen.xml" value="0.25" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/menu/module_menu.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/menu/setup_menu.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/mkolp/AndroidStudioProjects/HSECourses/app/src/main/res/xml/root_preferences.xml" value="0.25" />
       </map>
     </option>
   </component>

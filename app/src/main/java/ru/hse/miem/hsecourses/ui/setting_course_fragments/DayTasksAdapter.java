@@ -76,8 +76,8 @@ public class DayTasksAdapter extends RecyclerView.Adapter<DayTasksAdapter.ViewHo
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    removeItem(getBindingAdapterPosition());
                     if (mCallback != null) {
+                        removeItem(getBindingAdapterPosition());
                         mCallback.deleteClicked();
                     }
                 }

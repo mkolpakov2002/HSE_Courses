@@ -12,9 +12,11 @@ public class CourseViewModel extends AndroidViewModel {
 
     private LiveData<List<Course>> mAllCourses;
 
-    private LiveData<List<Week>> mAllWeeks;
+    private LiveData<List<Module>> mAllModules;
 
     private LiveData<List<Day>> mAllDays;
+
+    private LiveData<List<Topic>> mAllTopics;
 
     public CourseViewModel (Application application) {
         super(application);
@@ -22,22 +24,34 @@ public class CourseViewModel extends AndroidViewModel {
 
         mAllCourses = mRepository.getAllCourses();
 
-        mAllWeeks = mRepository.getAllWeeks();
+        mAllModules = mRepository.getAllModules();
 
         mAllDays = mRepository.getAllDays();
+
+        mAllTopics = mRepository.getAllTopics();
     }
 
     public LiveData<List<Course>> getAllCourses() { return mAllCourses; }
 
-    public LiveData<List<Week>> getAllWeeks() { return mAllWeeks; }
+    public LiveData<List<Module>> getAllModules() { return mAllModules; }
 
     public LiveData<List<Day>> getAllDays() { return mAllDays; }
 
+    public LiveData<List<Topic>> getAllTopics() {
+        return mAllTopics;
+    }
+
     public void insert(Course courses) { mRepository.insert(courses); }
 
-    public void insertWeeks(List<Week> weeks) { mRepository.insertWeeks(weeks); }
+    public void insertModules(List<Module> modules) { mRepository.insertWeeks(modules); }
 
     public void insertDays(List<Day> days) { mRepository.insertDays(days); }
 
+    public void insertTopics(List<Topic> days) { mRepository.insertTopics(days); }
+
     public void clear() { mRepository.clear(); }
+
+    public void clearModules() { mRepository.clear(); }
+
+    public void clearTopics() { mRepository.clear(); }
 }

@@ -52,12 +52,11 @@ public class SelectCourseAdapter extends RecyclerView.Adapter<SelectCourseAdapte
         holder.parentView.setStrokeColor(Color.BLACK);
         holder.parentView.getBackground().setAlpha(200);
         holder.imageViewCourseSelected.setVisibility(View.INVISIBLE);
-        //holder.parentView.setStrokeWidth(3);
+
         if(selectedCourse!=null && lastCheckedPosition==-1){
             if(selectedCourse.getCourseName().equals(name)){
                 lastCheckedPosition = holder.getBindingAdapterPosition();
                 holder.parentView.setCardElevation(8);
-                //parentView.setStrokeWidth(8);
                 holder.parentView.setStrokeColor(Color.BLUE);
                 holder.parentView.getBackground().setAlpha(255);
                 holder.imageViewCourseSelected.setVisibility(View.VISIBLE);
@@ -112,7 +111,4 @@ public class SelectCourseAdapter extends RecyclerView.Adapter<SelectCourseAdapte
         void onItemClick(View view, int selectedId);
     }
 
-    void setSelected(View view){
-
-    }
 }

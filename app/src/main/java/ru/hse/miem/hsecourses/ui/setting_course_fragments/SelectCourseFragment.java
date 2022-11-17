@@ -40,14 +40,10 @@ public class SelectCourseFragment extends Fragment implements SelectCourseAdapte
 
     SelectCourseAdapter selectCourseAdapter;
     RecyclerView courseSelectRecyclerView;
-    
-    List<Course> availableCourses;
 
     private Context context;
 
     private CommunicateData listener;
-
-   //boolean isNewCourse = true;
 
     @Override
     public void onAttach(@NonNull Context context) {

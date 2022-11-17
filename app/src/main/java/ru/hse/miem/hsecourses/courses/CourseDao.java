@@ -17,7 +17,6 @@ public interface CourseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Course> courses);
 
-
     // Удаление Person из бд
     @Delete
     void delete(Course person);

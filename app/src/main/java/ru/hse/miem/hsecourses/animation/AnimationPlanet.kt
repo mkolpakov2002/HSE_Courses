@@ -14,7 +14,7 @@ class AnimationPlanet : View {
     var perIndex: Float = 0F// Current coordinates
     var perIndexInAll: Float = 0F// Current coordinates
     var baseR = 200F
-    var viewBackgroundColor = 0xFFF9FAF9.toInt()//Background color
+    var viewBackgroundColor = 0x310062.toInt()//Background color
     val C = 0.552284749831f
 
     constructor(context: Context) : super(context)

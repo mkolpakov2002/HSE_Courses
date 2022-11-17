@@ -27,27 +27,24 @@ public class Course implements Serializable {
     private long minCourseTime;
 
     @Ignore
-    private List<Week> weekList;
+    private List<Module> moduleList;
 
     @Ignore
     private Date creationTime;
-
-    private int weekCount;
 
     boolean isSelected;
 
 
     public Course(int courseId, String courseName, String courseTarget, int hoursCount,
-                  int endedHoursCount, List<Week> weekList, Date creationTime, int weekCount, boolean isSelected){
+                  int endedHoursCount, List<Module> moduleList, Date creationTime, int moduleCount, boolean isSelected){
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseTarget = courseTarget;
         this.hoursCount = hoursCount;
         this.endedHoursCount = endedHoursCount;
-        this.weekList = weekList;
+        this.moduleList = moduleList;
         this.creationTime = creationTime;
         minCourseTime = 1000000;
-        this.weekCount = weekCount;
         this.isSelected = isSelected;
     }
 
@@ -56,10 +53,9 @@ public class Course implements Serializable {
         courseTarget = "";
         hoursCount = 100;
         endedHoursCount = 0;
-        weekList = new ArrayList<>();
+        moduleList = new ArrayList<>();
         creationTime = Calendar.getInstance().getTime();
         minCourseTime = 1000000;
-        weekCount = 16;
         isSelected = false;
     }
 
@@ -111,12 +107,13 @@ public class Course implements Serializable {
         this.endedHoursCount = endedHoursCount;
     }
 
-    public List<Week> getWeekList() {
-        return weekList;
+    public List<Module> getModuleList() {
+        return moduleList;
     }
 
-    public void setWeekList(List<Week> weekList) {
-        this.weekList = weekList;
+    public void setModuleList(List<Module> moduleList) {
+        //this.moduleList.clear();
+        this.moduleList=(moduleList);
     }
 
     public Date getCreationTime() {
@@ -135,11 +132,8 @@ public class Course implements Serializable {
         this.minCourseTime = minCourseTime;
     }
 
-    public int getWeekCount() {
-        return weekCount;
+    public int getModuleCount() {
+        return moduleList.size();
     }
 
-    public void setWeekCount(int weekCount) {
-        this.weekCount = weekCount;
-    }
 }

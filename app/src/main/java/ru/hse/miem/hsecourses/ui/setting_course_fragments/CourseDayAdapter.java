@@ -22,7 +22,6 @@ import ru.hse.miem.hsecourses.courses.Day;
 public class CourseDayAdapter extends RecyclerView.Adapter<CourseDayAdapter.ViewHolder>{
 
     private List<Day> mData;
-    private List<Integer> selectedData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     Context context;
@@ -32,7 +31,6 @@ public class CourseDayAdapter extends RecyclerView.Adapter<CourseDayAdapter.View
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.context = context;
-        selectedData = new ArrayList<>();
     }
 
     @NonNull
