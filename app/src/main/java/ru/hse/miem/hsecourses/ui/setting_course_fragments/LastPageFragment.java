@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import ru.hse.miem.hsecourses.R;
+import ru.hse.miem.hsecourses.courses.Task;
 import ru.hse.miem.hsecourses.graphics.GraphValue;
 import ru.hse.miem.hsecourses.graphics.PopupBarChart;
 import ru.hse.miem.hsecourses.courses.Course;
@@ -99,42 +100,34 @@ public class LastPageFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_last_page, container, false);
-        Course course = listener.getCourse();
+        graph = view.findViewById(R.id.customBarchart);
+        textViewHoursCount = view.findViewById(R.id.textViewHoursCount);
 
+        showGraphicTaskCount();
+
+        return view;
+    }
+
+    void showGraphicTaskCount(){
         List<GraphValue> values = new ArrayList<>();
-
         LocalDate today = LocalDate.now();
-
         DayOfWeek dayOfWeek = today.getDayOfWeek();
-
-        //TODO
         List<Day> dayList = listener.getAllDays();
+        List<Task> taskList = listener.getAllTasks();
         double[] daysHoursCount = new double[dayList.size()];
         double totalCount = 0.0;
-        for(int i = 0; i<dayList.size(); i++){
-            totalCount += (dayList.get(i).getTasksTimeCount()/(1000*60*60d));
-            daysHoursCount[i] = (dayList.get(i).getTasksTimeCount()/(1000*60*60d));
+        for(int i = 0; i<taskList.size(); i++){
+            totalCount += (taskList.get(i).getTaskTimeCount()/(1000*60*60d));
+            daysHoursCount[i] = (taskList.get(i).getTaskTimeCount()/(1000*60*60d));
             GraphValue curr = new GraphValue(i, i, (int) (daysHoursCount[i])*100/24,
                     dayOfWeek.getValue()-1==dayList.get(i).getDayNumber(),
                     false);
             values.add(curr);
         }
 
-
-        graph = view.findViewById(R.id.customBarchart);
-
-        graph.setGraphValues(values);
-        //graph.setTooltipBg(R.color.transparent);
-
-
         DecimalFormat decimalFormat = new DecimalFormat( "#.#" );
         String result = decimalFormat.format(totalCount);
-
-        textViewHoursCount = view.findViewById(R.id.textViewHoursCount);
+        graph.setGraphValues(values);
         textViewHoursCount.setText(result + " ч");
-
-
-
-        return view;
     }
 }

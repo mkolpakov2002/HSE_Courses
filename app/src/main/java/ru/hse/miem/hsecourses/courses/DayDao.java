@@ -3,6 +3,7 @@ package ru.hse.miem.hsecourses.courses;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface DayDao {
     @Query("DELETE FROM Day")
     void truncateTheList();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDataIntoDaysList(Day day);
 
     @Query("DELETE FROM Day WHERE dayId = :dayId")

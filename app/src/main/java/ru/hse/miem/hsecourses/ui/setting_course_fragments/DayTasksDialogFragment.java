@@ -30,11 +30,11 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
     final String LOG_TAG = "myLogs";
     private Context context;
     private CommunicateData listener;
-    List<Task> dayTaskList;
     TextView textViewIsAnyReminder;
     int selectedDayNumber;
     MaterialButton addNewTask;
     RecyclerView recyclerViewTasks;
+    List<Task> taskList;
 
     DayTasksAdapter adapter;
 
@@ -60,34 +60,40 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
 
         if (getArguments() != null) {
 
+            selectedDayNumber = getArguments().getInt("dayNumber");
+
             getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
                 @Override
                 public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
                     Task newTask = (Task) bundle.getSerializable("task");
-                    dayTaskList.add(0, newTask);
-                    adapter.notifyItemInserted(0);
+                    taskList.add(0, newTask);
+                    listener.setUpdatedTasksByDay(taskList, selectedDayNumber);
+                    Log.e("hse...", taskList.toString());
+                    reloadData();
+                    Log.e("hse...", taskList.toString());
+                    adapter.setData(taskList);
+                    adapter.notifyDataSetChanged();
                     onRefresh();
                 }
             });
 
-            selectedDayNumber = getArguments().getInt("dayNumber");
-            dayTaskList = listener.getTasksByDayNumber(selectedDayNumber);
             textViewIsAnyReminder = v.findViewById(R.id.textView);
 
             addNewTask = v.findViewById(R.id.buttonAddTimeReminder);
             addNewTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Bundle b = new Bundle();
                     b.putInt("dayNumber", selectedDayNumber);
                     Navigation.findNavController(requireParentFragment().requireView()).navigate(R.id.taskTimeDialogFragment, b);
                 }
             });
 
+            reloadData();
+
             recyclerViewTasks = v.findViewById(R.id.tasksList);
             recyclerViewTasks.setLayoutManager(new LinearLayoutManager(context));
-            adapter = new DayTasksAdapter(v.getContext(), dayTaskList);
+            adapter = new DayTasksAdapter(v.getContext(), taskList);
             adapter.setOnDeleteClickedListener(this);
             recyclerViewTasks.setAdapter(adapter);
             onRefresh();
@@ -95,7 +101,6 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // on success
-                    listener.saveTaskToDay(selectedDayNumber, dayTaskList);
                     Bundle b = new Bundle();
                     b.putInt("dayNumber", selectedDayNumber);
                     getParentFragmentManager().setFragmentResult("requestKeyDialogClosed", b);
@@ -105,12 +110,15 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (dialog != null) {
+                        Bundle b = new Bundle();
+                        //No changes
+                        b.putInt("dayNumber", -1);
+                        getParentFragmentManager().setFragmentResult("requestKeyDialogClosed", b);
                         dialog.dismiss();
                     }
                 }
 
             });
-
         } else {
             dismiss();
         }
@@ -131,11 +139,18 @@ public class DayTasksDialogFragment extends DialogFragment implements DayTasksAd
     }
 
     void onRefresh(){
-        if(dayTaskList.size()>0){
-            textViewIsAnyReminder.setVisibility(View.GONE);
-        } else {
-            textViewIsAnyReminder.setVisibility(View.VISIBLE);
+        if(adapter!=null) {
+            if (adapter.dataSize() > 0) {
+                textViewIsAnyReminder.setVisibility(View.GONE);
+            } else {
+                textViewIsAnyReminder.setVisibility(View.VISIBLE);
+            }
         }
+    }
+
+    void reloadData(){
+        //shallow copy of objects
+        taskList = new ArrayList<>(listener.getAllTasksByDay(selectedDayNumber));
     }
 
 

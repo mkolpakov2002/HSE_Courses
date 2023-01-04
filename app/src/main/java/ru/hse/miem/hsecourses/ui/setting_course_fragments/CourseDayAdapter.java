@@ -13,24 +13,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ru.hse.miem.hsecourses.R;
 import ru.hse.miem.hsecourses.courses.Day;
+import ru.hse.miem.hsecourses.courses.Task;
 
 public class CourseDayAdapter extends RecyclerView.Adapter<CourseDayAdapter.ViewHolder>{
 
-    private List<Day> mData;
-    private LayoutInflater mInflater;
+    private List<Day> dayList;
+    private List<Task> taskList;
+    private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     Context context;
 
     // data is passed into the constructor
-    CourseDayAdapter(Context context, List<Day> data) {
+    CourseDayAdapter(Context context, List<Day> data, List<Task> taskList) {
         this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+        this.dayList = data;
         this.context = context;
+        this.taskList = taskList;
     }
 
     @NonNull
@@ -42,14 +45,13 @@ public class CourseDayAdapter extends RecyclerView.Adapter<CourseDayAdapter.View
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(@NonNull CourseDayAdapter.ViewHolder holder, int position) {
-        String day = mData.get(position).getDayName();
+        String day = dayList.get(position).getDayName();
         holder.dayName.setText(day);
-        if(mData.get(position).getTaskList().size()>0){
+        if(taskList.stream().anyMatch(t -> t.getDayNumber() == position)){
             holder.isReminderSaved.setText(context.getString(R.string.status_days_tasks_saved));
             holder.imageViewCheckMarkReminderSaved.setImageResource(R.drawable.ic_baseline_alarm_on_24);
             holder.parentView.setCardElevation(8);
             holder.parentView.getBackground().setAlpha(255);
-
         } else {
             holder.isReminderSaved.setText(context.getString(R.string.status_days_tasks_not_saved));
             holder.imageViewCheckMarkReminderSaved.setImageResource(R.drawable.ic_baseline_alarm_add_24);
@@ -58,8 +60,10 @@ public class CourseDayAdapter extends RecyclerView.Adapter<CourseDayAdapter.View
         }
     }
 
-    public void updateDay(int dayNumber){
-        notifyItemChanged(dayNumber);
+    public void updateData(List<Day> data, List<Task> taskList){
+        dayList = data;
+        this.taskList = taskList;
+        notifyDataSetChanged();
     }
 
     /**
@@ -69,12 +73,12 @@ public class CourseDayAdapter extends RecyclerView.Adapter<CourseDayAdapter.View
      */
     @Override
     public int getItemCount() {
-        return mData.size();
+        return dayList.size();
     }
 
     // convenience method for getting data at click position
     Day getItem(int id) {
-        return mData.get(id);
+        return dayList.get(id);
     }
 
     // allows clicks events to be caught

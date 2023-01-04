@@ -11,11 +11,11 @@ public class Constants {
 
     public static Boolean isTestLaunch = true;
 
-    public static final int adapterHomeGame = 0;
+    public static final String adapterHomeGame = "game";
 
-    public static final int adapterHomePlanet = 1;
+    public static final String adapterHomePlanet = "planet";
 
-    public static final int adapterHomeSimple = 2;
+    public static final String adapterHomeSimple = "default";
 
 
     public static String isDarkMode = "isDarkMode";

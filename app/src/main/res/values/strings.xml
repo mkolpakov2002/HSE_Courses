@@ -53,5 +53,8 @@
     <string name="notify_title" >Get notified!</string>
     <string name="go_next_perm" >I\'m in</string>
     <string name="skip">Skip</string>
+    <string name="loading_your_courses">Loading your modules…</string>
+    <string name="mark_completed">Mark Completed</string>
+    <string name="mark_as_unfulfilled">Mark as unfulfilled</string>
 
 </resources>

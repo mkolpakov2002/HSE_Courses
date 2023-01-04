@@ -16,7 +16,7 @@
             app:exitAnim="@anim/nav_default_exit_anim"/>
         <action
             android:id="@+id/action_navigation_home_to_commonFragment"
-            app:destination="@id/navigation_common"
+            app:destination="@id/navigation_settings"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"/>
         <action
@@ -26,7 +26,7 @@
             app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_navigation_home_to_moduleFragment"
-            app:destination="@id/moduleFragment" />
+            app:destination="@id/navigation_module" />
     </fragment>
 
     <fragment
@@ -39,23 +39,20 @@
             app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_navigation_dashboard_to_commonFragment"
-            app:destination="@id/navigation_common" />
+            app:destination="@id/navigation_settings" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_common"
-        android:name="ru.hse.miem.hsecourses.ui.common.CommonFragment"
-        android:label="fragment_common"
-        tools:layout="@layout/fragment_common" >
+        android:id="@+id/navigation_settings"
+        android:name="ru.hse.miem.hsecourses.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@xml/root_preferences" >
         <action
             android:id="@+id/action_commonFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_commonFragment_to_navigation_dashboard"
             app:destination="@id/navigation_graph" />
-        <action
-            android:id="@+id/action_navigation_common_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/firstPageFragment"
@@ -156,21 +153,13 @@
             app:destination="@id/courseDayFragment" />
     </dialog>
     <fragment
-        android:id="@+id/moduleFragment"
+        android:id="@+id/navigation_module"
         android:name="ru.hse.miem.hsecourses.ui.module.ModuleFragment"
         android:label="fragment_module"
         tools:layout="@layout/fragment_module" >
         <action
             android:id="@+id/action_moduleFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
-    </fragment>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="ru.hse.miem.hsecourses.ui.settings.SettingsFragment"
-        android:label="SettingsFragment">
-        <action
-            android:id="@+id/action_settingsFragment_to_navigation_common"
-            app:destination="@id/navigation_common" />
     </fragment>
     <fragment
         android:id="@+id/permissionFragment"

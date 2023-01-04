@@ -14,9 +14,6 @@ public class Day implements Serializable {
     @PrimaryKey(autoGenerate = true)
     int dayId;
 
-    @Ignore
-    private List<Task> taskList;
-
     private int dayNumber;
 
     private String dayName;
@@ -27,12 +24,14 @@ public class Day implements Serializable {
     long tasksTimeCount;
 
     public Day(){
-        taskList = new ArrayList<>();
-
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    public Day(Day day){
+        this.dayId = day.dayId;
+        this.dayNumber = day.dayNumber;
+        this.dayName = day.dayName;
+        this.weekNumber = day.weekNumber;
+        this.tasksTimeCount = day.tasksTimeCount;
     }
 
     public int getDayNumber() {
@@ -51,10 +50,6 @@ public class Day implements Serializable {
         this.dayNumber = dayNumber;
     }
 
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
-
     public int getDayId() {
         return dayId;
     }
@@ -71,18 +66,12 @@ public class Day implements Serializable {
         return weekNumber;
     }
 
-    public void setTasks(List<Task> taskList){
-        this.taskList = taskList;
-
-        //timeCount = timeCount + (newTask.getEndTime()-newTask.getStartTime())
-    }
-
-    public long getTasksTimeCount() {
-        for(int i = 0; i< taskList.size(); i++){
-            tasksTimeCount = taskList.get(i).getEndTime().getTime()
-                    - taskList.get(i).getStartTime().getTime();
-            //tasksTimeCount
-        }
-        return tasksTimeCount;
-    }
+//    public long getTasksTimeCount() {
+//        for(int i = 0; i< taskList.size(); i++){
+//            tasksTimeCount = taskList.get(i).getEndTime().getTime()
+//                    - taskList.get(i).getStartTime().getTime();
+//            //tasksTimeCount
+//        }
+//        return tasksTimeCount;
+//    }
 }

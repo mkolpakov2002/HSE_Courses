@@ -62,6 +62,7 @@ public class Task implements Serializable {
     }
 
     public Date getEndTime() {
+
         return endTime;
     }
 
@@ -85,5 +86,10 @@ public class Task implements Serializable {
 
     public int getDayNumber() {
         return dayNumber;
+    }
+
+    public long getTaskTimeCount() {
+        return getEndTime().getTime()
+                - getStartTime().getTime();
     }
 }

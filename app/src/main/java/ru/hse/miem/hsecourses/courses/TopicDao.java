@@ -3,6 +3,7 @@ package ru.hse.miem.hsecourses.courses;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface TopicDao {
     @Query("DELETE FROM Topic")
     void truncateTheList();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDataIntoTopicList(Topic task);
 
     @Query("DELETE FROM Topic WHERE topicId = :topicId")

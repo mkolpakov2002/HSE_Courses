@@ -23,6 +23,12 @@ public class Topic {
 
     private ArrayList<String> topicTest;
 
+    //0 - тема
+    //1 - учебные задания
+    //2 - контрольные задания
+    //3 - промежуточный и итоговый контроль
+    private int itemType;
+
     public Topic(){
         topicVideos = new ArrayList<>();
         topicLecture = new ArrayList<>();
@@ -83,5 +89,13 @@ public class Topic {
 
     public void setTopicId(int topicId) {
         this.topicId = topicId;
+    }
+
+    public int getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(int itemType) {
+        this.itemType = itemType;
     }
 }

@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,19 +62,17 @@ public class CourseDayFragment extends Fragment {
         recyclerViewDays = view.findViewById(R.id.recyclerViewDays);
         recyclerViewDays.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-
-        // data to populate the RecyclerView with
-        List<Day> daysList;
-        daysList = listener2.getAllDays();
-
-        adapter = new CourseDayAdapter(view.getContext(), daysList);
+        adapter = new CourseDayAdapter(view.getContext(),
+                listener2.getAllDays(),
+                listener2.getAllTasks());
 
         getParentFragmentManager().setFragmentResultListener("requestKeyDialogClosed", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
                 int dayNumber = bundle.getInt("dayNumber", -1);
+                Log.e("Course Day Fragment result", String.valueOf(dayNumber));
                 if(dayNumber<=6&&dayNumber>=0)
-                    adapter.updateDay(dayNumber);
+                    adapter.updateData(listener2.getAllDays(), listener2.getAllTasks());
             }
         });
 
@@ -85,19 +84,21 @@ public class CourseDayFragment extends Fragment {
             }
         });
 
-        adapter.setClickListener(new CourseDayAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Bundle b = new Bundle();
-                b.putInt("dayNumber", position);
-                Navigation.findNavController(view).navigate(R.id.courseTimeReminderDialogFragment, b);
-                dayNumber = position;
-            }
+        adapter.setClickListener((view1, position) -> {
+            Bundle b = new Bundle();
+            b.putInt("dayNumber", position);
+            Navigation.findNavController(view1).navigate(R.id.courseTimeReminderDialogFragment, b);
+            dayNumber = position;
         });
 
         recyclerViewDays.setAdapter(adapter);
-
         return view;
+    }
+
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume", "onResume called");
+        adapter.updateData(listener2.getAllDays(), listener2.getAllTasks());
     }
 
 }

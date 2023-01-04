@@ -19,18 +19,23 @@
 <!--        android:alpha="0.4"-->
 <!--        android:scaleType="centerCrop"/>-->
 
-    <TextView
-        android:id="@+id/textViewDaySelectTitle"
-        style="@style/TextAppearance.Material3.DisplaySmall"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/graphAppBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/select_day_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_day_time"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:gravity="center_vertical"
+            android:padding="8dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle">
+        app:layout_constraintTop_toBottomOf="@+id/graphAppBarLayout">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

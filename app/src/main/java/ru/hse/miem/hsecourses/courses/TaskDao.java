@@ -1,7 +1,9 @@
 package ru.hse.miem.hsecourses.courses;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -10,12 +12,12 @@ import java.util.List;
 public interface TaskDao {
 
     @Query("SELECT * FROM Task")
-    List<Task> getAllTasksList();
+    LiveData<List<Task>> getAllTasksList();
 
     @Query("DELETE FROM Task")
     void truncateTheList();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDataIntoTaskList(Task task);
 
     @Query("DELETE FROM Task WHERE taskId = :taskId")

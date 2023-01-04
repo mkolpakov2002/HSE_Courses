@@ -93,4 +93,12 @@ public class DayTasksAdapter extends RecyclerView.Adapter<DayTasksAdapter.ViewHo
         void deleteClicked();
     }
 
+    public int dataSize(){
+        return mData.size();
+    }
+
+    public void setData(List<Task> mData){
+        this.mData = mData;
+    }
+
 }

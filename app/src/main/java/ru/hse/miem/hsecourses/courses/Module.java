@@ -18,9 +18,9 @@ public class Module implements Serializable {
 
     private int courseNumber;
 
-    private boolean isEnded;
+    private boolean isEnded = false;
 
-    private boolean isUnlocked;
+    private boolean isUnlocked = false;
 
     private String moduleInformation;
 

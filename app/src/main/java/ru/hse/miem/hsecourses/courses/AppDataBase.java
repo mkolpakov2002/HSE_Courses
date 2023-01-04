@@ -35,4 +35,6 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract DayDao getDaysDao();
 
     public abstract TopicDao getTopicsDao();
+
+    public abstract TaskDao getTasksDao();
 }

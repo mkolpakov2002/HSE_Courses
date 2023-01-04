@@ -1,4 +1,4 @@
-package ru.hse.miem.hsecourses.courses;
+package ru.hse.miem.hsecourses.ui;
 
 import android.app.Application;
 
@@ -7,7 +7,15 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class CourseViewModel extends AndroidViewModel {
+import ru.hse.miem.hsecourses.courses.Course;
+import ru.hse.miem.hsecourses.courses.Day;
+import ru.hse.miem.hsecourses.courses.Module;
+import ru.hse.miem.hsecourses.courses.Repository;
+import ru.hse.miem.hsecourses.courses.Task;
+import ru.hse.miem.hsecourses.courses.Topic;
+
+public class MainViewModel extends AndroidViewModel {
+
     private Repository mRepository;
 
     private LiveData<List<Course>> mAllCourses;
@@ -18,7 +26,9 @@ public class CourseViewModel extends AndroidViewModel {
 
     private LiveData<List<Topic>> mAllTopics;
 
-    public CourseViewModel (Application application) {
+    private LiveData<List<Task>> mAllTasks;
+
+    public MainViewModel(Application application) {
         super(application);
         mRepository = new Repository(application);
 
@@ -29,6 +39,8 @@ public class CourseViewModel extends AndroidViewModel {
         mAllDays = mRepository.getAllDays();
 
         mAllTopics = mRepository.getAllTopics();
+
+        mAllTasks = mRepository.getAllTasks();
     }
 
     public LiveData<List<Course>> getAllCourses() { return mAllCourses; }
@@ -37,9 +49,9 @@ public class CourseViewModel extends AndroidViewModel {
 
     public LiveData<List<Day>> getAllDays() { return mAllDays; }
 
-    public LiveData<List<Topic>> getAllTopics() {
-        return mAllTopics;
-    }
+    public LiveData<List<Topic>> getAllTopics() { return mAllTopics; }
+
+    public LiveData<List<Task>> getAllTasks() { return mAllTasks; }
 
     public void insert(Course courses) { mRepository.insert(courses); }
 
@@ -47,11 +59,9 @@ public class CourseViewModel extends AndroidViewModel {
 
     public void insertDays(List<Day> days) { mRepository.insertDays(days); }
 
-    public void insertTopics(List<Topic> days) { mRepository.insertTopics(days); }
+    public void insertTasks(List<Task> tasks) { mRepository.insertTasks(tasks); }
+
+    public void insertTopics(List<Topic> topics) { mRepository.insertTopics(topics); }
 
     public void clear() { mRepository.clear(); }
-
-    public void clearModules() { mRepository.clear(); }
-
-    public void clearTopics() { mRepository.clear(); }
 }

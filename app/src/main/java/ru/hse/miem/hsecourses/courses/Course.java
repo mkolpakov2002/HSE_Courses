@@ -27,35 +27,30 @@ public class Course implements Serializable {
     private long minCourseTime;
 
     @Ignore
-    private List<Module> moduleList;
-
-    @Ignore
     private Date creationTime;
 
     boolean isSelected;
 
 
     public Course(int courseId, String courseName, String courseTarget, int hoursCount,
-                  int endedHoursCount, List<Module> moduleList, Date creationTime, int moduleCount, boolean isSelected){
+                  int endedHoursCount, Date creationTime, int moduleCount, boolean isSelected){
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseTarget = courseTarget;
         this.hoursCount = hoursCount;
         this.endedHoursCount = endedHoursCount;
-        this.moduleList = moduleList;
         this.creationTime = creationTime;
-        minCourseTime = 1000000;
+        minCourseTime = 10;
         this.isSelected = isSelected;
     }
 
     public Course(){
         courseName = "Default course";
         courseTarget = "";
-        hoursCount = 100;
+        hoursCount = 0;
         endedHoursCount = 0;
-        moduleList = new ArrayList<>();
         creationTime = Calendar.getInstance().getTime();
-        minCourseTime = 1000000;
+        minCourseTime = 10;
         isSelected = false;
     }
 
@@ -107,15 +102,6 @@ public class Course implements Serializable {
         this.endedHoursCount = endedHoursCount;
     }
 
-    public List<Module> getModuleList() {
-        return moduleList;
-    }
-
-    public void setModuleList(List<Module> moduleList) {
-        //this.moduleList.clear();
-        this.moduleList=(moduleList);
-    }
-
     public Date getCreationTime() {
         return creationTime;
     }
@@ -130,10 +116,6 @@ public class Course implements Serializable {
 
     public void setMinCourseTime(long minCourseTime) {
         this.minCourseTime = minCourseTime;
-    }
-
-    public int getModuleCount() {
-        return moduleList.size();
     }
 
 }

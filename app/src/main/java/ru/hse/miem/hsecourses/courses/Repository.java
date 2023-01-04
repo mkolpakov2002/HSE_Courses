@@ -20,6 +20,9 @@ public class Repository {
     private TopicDao mTopicDao;
     private LiveData<List<Topic>> mAllTopics;
 
+    private TaskDao mTaskDao;
+    private LiveData<List<Task>> mAllTasks;
+
     public Repository(Application application) {
         AppDataBase db = AppDataBase.getAppDb(application);
         mCourseDao = db.getCourseDao();
@@ -33,6 +36,9 @@ public class Repository {
 
         mTopicDao = db.getTopicsDao();
         mAllTopics = mTopicDao.getAllTopicsList();
+
+        mTaskDao = db.getTasksDao();
+        mAllTasks = mTaskDao.getAllTasksList();
     }
 
     public LiveData<List<Topic>> getAllTopics() {
@@ -59,8 +65,8 @@ public class Repository {
         new insertAsyncTaskCourse(mCourseDao).execute(word);
     }
 
-    public void insertWeeks (List<Module> modules) {
-        new insertAsyncTaskWeek(mWeeksDao).execute(modules);
+    public void insertModules(List<Module> modules) {
+        new insertAsyncTaskModule(mWeeksDao).execute(modules);
     }
 
     public void insertDays (List<Day> days) {
@@ -69,6 +75,14 @@ public class Repository {
 
     public void clear(){
         new clearAsyncTask(mCourseDao, mWeeksDao, mDaysDao, mTopicDao).execute();
+    }
+
+    public LiveData<List<Task>> getAllTasks() {
+        return mAllTasks;
+    }
+
+    public void insertTasks(List<Task> tasks) {
+        new insertAsyncTaskTask(mTaskDao).execute(tasks);
     }
 
     private static class insertAsyncTaskCourse extends AsyncTask<Course, Void, Void> {
@@ -88,12 +102,12 @@ public class Repository {
     }
 
 
-    private static class insertAsyncTaskWeek extends AsyncTask<List<Module>, Void, Void> {
+    private static class insertAsyncTaskModule extends AsyncTask<List<Module>, Void, Void> {
 
         private ModuleDao mAsyncTaskDao;
 
         @Deprecated
-        insertAsyncTaskWeek(ModuleDao dao) {
+        insertAsyncTaskModule(ModuleDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -135,6 +149,23 @@ public class Repository {
         protected Void doInBackground(final List<Day>... params) {
             for(Day curr: params[0])
                 mAsyncTaskDao.insertDataIntoDaysList(curr);
+            return null;
+        }
+    }
+
+    private static class insertAsyncTaskTask extends AsyncTask<List<Task>, Void, Void> {
+
+        private TaskDao mAsyncTaskDao;
+
+        @Deprecated
+        insertAsyncTaskTask(TaskDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final List<Task>... params) {
+            for(Task curr: params[0])
+                mAsyncTaskDao.insertDataIntoTaskList(curr);
             return null;
         }
     }

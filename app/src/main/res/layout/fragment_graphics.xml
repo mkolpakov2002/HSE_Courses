@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDaySelectTitle6">
+        app:layout_constraintTop_toBottomOf="@+id/graphAppBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -178,14 +178,14 @@
                             android:layout_marginTop="8dp"
 
                             android:layout_marginEnd="8dp"
-                            android:text="Пройдено недель курса за время обучения"
+                            android:text="Пройдено модулей курса за время обучения"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/view2"
                             app:layout_constraintTop_toBottomOf="@+id/textViewWeeksCount" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ir.mahozad.android.PieChart
-                        android:id="@+id/pieChartWeeks"
+                        android:id="@+id/pieChartModules"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -203,18 +203,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/textViewDaySelectTitle6"
-        style="@style/TextAppearance.Material3.DisplaySmall"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/graphAppBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Ваша статистика"
-        android:textColor="@color/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ваша статистика"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:gravity="center_vertical"
+            android:padding="8dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

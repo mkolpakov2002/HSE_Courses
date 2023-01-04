@@ -1,4 +1,10 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Настройки"
+        android:textSize="10dp"
+        android:layout="@layout/settings_toolbar" />
 
     <PreferenceCategory app:title="Уведомления">
 
@@ -25,13 +31,9 @@
             app:defaultValue="default"
             app:entries="@array/adapter_entries"
             app:entryValues="@array/adapter_values"
-            app:key="adapter"
+            app:key="planet"
             app:title="Вид главного экрана"
             app:useSimpleSummaryProvider="true" />
-
-        <SwitchPreferenceCompat
-            app:key="darkTheme"
-            app:title="Включить тёмную тему" />
 
     </PreferenceCategory>
 
